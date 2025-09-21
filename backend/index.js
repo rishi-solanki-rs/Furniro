@@ -2,21 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const PORT = 5001;
-const allowedOrigins = ['https://furniro-shop-frontend.onrender.com/', 'http://localhost:3000'];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-};
-app.use(cors(corsOptions));
+app.use(cors({origin:'https://furniro-shop-frontend.onrender.com',
+  credentials:true}));
 app.use(express.json());
 
 // In-memory product database
